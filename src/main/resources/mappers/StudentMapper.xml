@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="StudentMapper">
+
+	<resultMap id="student" type="study.spring.hellospring.model.Student">
+		<result property="studno" column="studno" />
+		<result property="name" column="name" />
+		<result property="userid" column="userid" />
+        <result property="grade" column="grade" />
+        <result property="idnum" column="idnum" />
+        <result property="birthdate" column="birthdate" />
+        <result property="tel" column="tel" />
+        <result property="height" column="height" />
+        <result property="weight" column="weight" />
+        <result property="deptno" column="deptno" />
+        <result property="profno" column="profno" />
+	</resultMap>
+
+	<insert id="insertStudentItem"
+	    	parameterType="study.spring.hellospring.model.Student"
+	    	useGeneratedKeys="true"
+	    	keyProperty="studno">
+        INSERT INTO student (name, userid, grade, idnum, birthdate, tel, height, weight, deptno, profno) VALUES (#{name}, #{userid}, #{grade}, #{idnum}, #{birthdate}, #{tel}, #{height}, #{weight}, #{deptno}, #{profno})
+	</insert>
+
+	<delete id="deleteStudentItem"
+	    	parameterType="study.spring.hellospring.model.Student">
+		DELETE FROM student WHERE studno=#{studno}
+	</delete>
+
+	<update id="updateStudentItem"
+	    	parameterType="study.spring.hellospring.model.Student">
+		UPDATE student SET name=#{name}, userid=#{userid}, grade=#{grade}, idnum=#{idnum}, birthdate=#{birthdate}, tel=#{tel}, height=#{height}, weight=#{weight}, deptno=#{deptno}, profno=#{profno} WHERE studno=#{studno}
+	</update>
+
+	<select id="selectStudentList" parameterType="study.spring.hellospring.model.Student"
+	 resultMap="student">
+		SELECT
+			studno, name, userid, grade, idnum, birthdate, tel, height, weight, deptno, profno
+		FROM student
+		ORDER BY studno ASC
+	</select>
+		
+	<select id="selectStudentItem" parameterType="study.spring.hellospring.model.Student"
+	 resultMap="student">
+		SELECT
+			studno, name, userid, grade, idnum, birthdate, tel, height, weight, deptno, profno
+		FROM student
+		WHERE studno=#{studno}
+	</select>
+		
+</mapper>
